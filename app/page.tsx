@@ -55,25 +55,32 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Instrucciones - Responsive */}
-      <div className="absolute left-4 md:right-6 bottom-4 md:top-1/2 md:-translate-y-1/2 z-10 bg-black/30 backdrop-blur-sm rounded-lg px-3 py-2 md:px-4 md:py-3 text-white text-xs md:text-sm space-y-1 md:space-y-2 pointer-events-none">
+      {/* Instrucciones - Desktop (derecha centro) */}
+      <div className="hidden md:block absolute right-6 top-1/2 -translate-y-1/2 z-10 bg-black/30 backdrop-blur-sm rounded-lg px-4 py-3 text-white text-sm space-y-2 pointer-events-none">
         <p className="flex items-center gap-2">
-          <span className="text-base md:text-lg">🖱️</span>
-          <span className="hidden sm:inline">Click + Drag = Rotar</span>
-          <span className="sm:hidden">Drag = Rotar</span>
+          <span className="text-lg">🖱️</span> Click + Drag = Rotar
         </p>
         <p className="flex items-center gap-2">
-          <span className="text-base md:text-lg">🔍</span>
-          <span className="hidden sm:inline">Scroll = Zoom</span>
-          <span className="sm:hidden">Pinch = Zoom</span>
+          <span className="text-lg">🔍</span> Scroll = Zoom
         </p>
-        <p className="flex items-center gap-2 hidden sm:flex">
+        <p className="flex items-center gap-2">
           <span className="text-lg">✋</span> Right Click = Mover
         </p>
         <p className="flex items-center gap-2">
-          <span className="text-base md:text-lg">💡</span>
-          <span className="hidden sm:inline">Click = {lightsOn ? 'Apagar' : 'Prender'}</span>
-          <span className="sm:hidden">Tap = Luz</span>
+          <span className="text-lg">💡</span> Click = {lightsOn ? 'Apagar' : 'Prender'}
+        </p>
+      </div>
+
+      {/* Instrucciones - Mobile (abajo izquierda) */}
+      <div className="md:hidden absolute left-4 bottom-4 z-10 bg-black/30 backdrop-blur-sm rounded-lg px-3 py-2 text-white text-xs space-y-1 pointer-events-none">
+        <p className="flex items-center gap-2">
+          <span className="text-base">🖱️</span> Drag = Rotar
+        </p>
+        <p className="flex items-center gap-2">
+          <span className="text-base">🔍</span> Pinch = Zoom
+        </p>
+        <p className="flex items-center gap-2">
+          <span className="text-base">💡</span> Tap = Luz
         </p>
       </div>
 
@@ -81,7 +88,6 @@ export default function Home() {
         camera={{ position: [0, 5, 12], fov: 50 }}
         shadows
         gl={{ preserveDrawingBuffer: true }}
-        // Touch-friendly
         style={{ touchAction: 'none' }}
       >
         <ambientLight intensity={lightsOn ? 1 : 0.1} />
@@ -101,10 +107,9 @@ export default function Home() {
           enableZoom={true}
           enableRotate={true}
           target={[0, 0, 0]}
-          // Touch-friendly
           touches={{
-            ONE: 0,   // Un dedo = Rotar
-            TWO: 2    // Dos dedos = Zoom/Pan
+            ONE: 0,
+            TWO: 2
           }}
           mouseButtons={{
             LEFT: 0,
